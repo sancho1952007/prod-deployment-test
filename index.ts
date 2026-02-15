@@ -34,7 +34,8 @@ Bun.serve({
         RequestsCount++;
         return new Response(`Request ID: ${Bun.randomUUIDv7()}, Count: ${RequestsCount}`);
     },
-    port: 3000
+    port: 3000,
+    reusePort: true
 });
 
 // Setup cron jobs
