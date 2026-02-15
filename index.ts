@@ -50,8 +50,10 @@ cronjobs.add({
     immediate: true,
     callback: async () => {
         console.log('Storing requests count into DB:', RequestsCount);
+        // Server id format: [server id][instance id]
+        // Example: 11 Will be server 1 instance 1. 12 Will be server 1 instance 2.
         await sql`
-            INSERT INTO APP.REQUESTS_COUNT (count, server) VALUES (${RequestsCount}, ${Bun.env.SERVER_ID}_${Bun.env.NODE_APP_INSTANCE})
+            INSERT INTO APP.REQUESTS_COUNT (count, server) VALUES (${RequestsCount}, ${Bun.env.SERVER_ID}${Bun.env.NODE_APP_INSTANCE})
         `;
     },
 });
