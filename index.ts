@@ -49,8 +49,7 @@ cronjobs.add({
     name: 'Store Requests To DB',
     cron: '@every_5_minutes',
     // Do not store the value immediately
-    // immediate: false,
-    immediate: true,
+    immediate: false,
     callback: async () => {
         console.log('Storing requests count into DB:', RequestsCount);
         // Server id format: [server id][instance id]
