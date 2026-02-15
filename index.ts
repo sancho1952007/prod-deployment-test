@@ -53,7 +53,7 @@ cronjobs.add({
         // Server id format: [server id][instance id]
         // Example: 11 Will be server 1 instance 1. 12 Will be server 1 instance 2.
         await sql`
-            INSERT INTO APP.REQUESTS_COUNT (count, server) VALUES (${RequestsCount}, ${Bun.env.SERVER_ID}${Bun.env.NODE_APP_INSTANCE})
+            INSERT INTO APP.REQUESTS_COUNT (count, server) VALUES (${RequestsCount}, ${(Bun.env.SERVER_ID || 'u') + (Bun.env.NODE_APP_INSTANCE || 'u')})
         `;
     },
 });
