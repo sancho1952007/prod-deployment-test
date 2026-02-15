@@ -24,11 +24,13 @@ await sql`CREATE TABLE IF NOT EXISTS APP.REQUESTS_COUNT (
 RequestsCount = (await sql`
 SELECT COUNT
 FROM APP.REQUESTS_COUNT
+WHERE SERVER=${Bun.env.SERVER_ID}
+AND INSTANCE=${Bun.env.NODE_APP_INSTANCE}
 ORDER BY ID DESC
 LIMIT 1
 `)[0]?.count || 0;
 
-console.log('Loaded last request count:', RequestsCount);
+console.log('[-] Loaded last request count:', RequestsCount);
 
 Bun.serve({
     fetch: () => {
