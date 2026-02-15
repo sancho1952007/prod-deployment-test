@@ -44,14 +44,14 @@ const cronjobs = new Baker();
 // Update the request count every 2 minutes
 cronjobs.add({
     name: 'Store Requests To DB',
-    cron: '@every_2_minutes',
+    cron: '@every_5_minutes',
     // Do not store the value immediately
-    immediate: false,
+    // immediate: false,
+    immediate: true,
     callback: async () => {
         console.log('Storing requests count into DB:', RequestsCount);
-
         await sql`
-            INSERT INTO APP.REQUESTS_COUNT (count, server) VALUES (${RequestsCount}, ${Bun.env.SERVER_ID})
+            INSERT INTO APP.REQUESTS_COUNT (count, server) VALUES (${RequestsCount}, ${Bun.env.SERVER_ID}_${Bun.env.NODE_APP_INSTANCE})
         `;
     },
 });
