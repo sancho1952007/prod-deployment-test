@@ -35,7 +35,7 @@ console.log('[-] Loaded last request count:', RequestsCount);
 Bun.serve({
     fetch: () => {
         RequestsCount++;
-        return new Response(`Request ID: ${Bun.randomUUIDv7()}, Count: ${RequestsCount}`);
+        return new Response(`Request ID: ${Bun.randomUUIDv7()}`);
     },
     port: 3000,
     reusePort: true
