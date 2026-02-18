@@ -33,7 +33,8 @@ LIMIT 1
 console.log('[-] Loaded last request count:', RequestsCount);
 
 Bun.serve({
-    fetch: () => {
+    fetch: (req) => {
+        console.log('Request from IP: ', req.headers.get('cf-connecting-ip'));
         RequestsCount++;
         return new Response(`Request ID: ${Bun.randomUUIDv7()}`);
     },
