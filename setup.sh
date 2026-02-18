@@ -1,5 +1,5 @@
 bun install
 bun run build
 pm2 startup
-pm2 run ./dist/linux-amd64 -i max
+bun run start
 pm2 save
