@@ -1,6 +1,7 @@
 import Bun from 'bun';
 import Baker from "cronbake";
 import { SQL } from 'bun';
+import { appendFileSync } from "node:fs";
 
 let RequestsCount = 0;
 const sql = new SQL(Bun.env.DB_URL!, {
@@ -34,7 +35,7 @@ console.log('[-] Loaded last request count:', RequestsCount);
 
 Bun.serve({
     fetch: (req) => {
-        console.log('Request from IP: ', req.headers.get('cf-connecting-ip'));
+        appendFileSync(Bun.env.LOGFILE_PATH!, `Request from IP: ${req.headers.get('cf-connecting-ip')}\n`);
         RequestsCount++;
         return new Response(`Request ID: ${Bun.randomUUIDv7()}`);
     },
