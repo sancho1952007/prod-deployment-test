@@ -1,3 +1,3 @@
 git pull
 bun run build
-pm2 reload
+pm2 reload main-server
